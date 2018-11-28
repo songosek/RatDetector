@@ -7,4 +7,4 @@ Mat* Harris(Mat* imageGray);
 Mat* NowyHarris(Mat* imageGray);
 void ShiTomasi();
 Mat* OtsuThresholding(Mat* imageGray);
-Mat* DynamicThresholding(Mat* imageGray);
+Mat* DynamicThresholding(Mat* imageGray, int sliderValue);

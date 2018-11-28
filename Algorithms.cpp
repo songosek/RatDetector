@@ -14,7 +14,7 @@ Mat* Harris(Mat* imageGray) {
 	int blockSize = 2;
 	int apertureSize = 3;
 	double k = 0.04;
-	int thresh = 150;
+	int thresh = 120;
 
 
 	/// Detecting corners
@@ -55,13 +55,12 @@ Mat* NowyHarris(Mat* imageGray) {
 	*output = (*imageGray).clone();
 
 	/// Detector parameters
-	int blockSize = 5;
-	int apertureSize = 1;
-	double k = 0.04;
+	int blockSize = 3;
+	int k = 3;
 	int thresh = 150;
 
 	/// Detecting corners
-	cornerHarris(*imageGray, dst, blockSize, apertureSize, k, BORDER_DEFAULT);
+	cornerMinEigenVal(*imageGray, dst, blockSize, k, BORDER_DEFAULT);
 
 	/// Normalizing
 	normalize(dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
@@ -85,12 +84,12 @@ Mat* OtsuThresholding(Mat* imageGray) {
 	return binaryImage;
 }
 
-Mat* DynamicThresholding(Mat* imageGray) {
+Mat* DynamicThresholding(Mat* imageGray, int sliderValue) {
 
 	Mat* binaryImage = new Mat();
+	double percent = (double)sliderValue / 10000;
 	vector<float> brightnessVector = (*imageGray).reshape(0, 1);
 	cv::sort(brightnessVector, brightnessVector, CV_SORT_DESCENDING);
-	double percent = 0.004;
 	double border = (double)brightnessVector[brightnessVector.size() * percent];
 	threshold(*imageGray, *binaryImage, border, 255, THRESH_BINARY);
 

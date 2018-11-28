@@ -31,11 +31,11 @@ vector<Mat*> DetectBody(Mat* imageGray, Mat* image) {
 	return output;
 }
 
-vector<Mat*> DetectMouth(Mat* imageGray, Mat* image) {
+vector<Mat*> DetectMouth(Mat* imageGray, Mat* image, int sliderValue) {
 
 	vector<Mat*> output;
 
-	Mat* binaryImage = DynamicThresholding(imageGray);
+	Mat* binaryImage = DynamicThresholding(imageGray, sliderValue);
 	output.push_back(binaryImage);
 
 	Mat* blobBinaryImage = new Mat();
@@ -67,9 +67,10 @@ vector<Mat*> DetectMouth(Mat* imageGray, Mat* image) {
 	*result = (*image).clone();
 	for (int i = 0; i < contours.size(); i++)
 	{
-		drawContours(*result, contours, i, Scalar(0, 0, 255), 2, 8, hierarchy, 0);
+		drawContours(*result, contours, i, Scalar(255, 0, 0), 2, 8, hierarchy, 0);
 	}
 
 	output.push_back(result);
+	output.push_back(blobBinaryImage);
 	return output;
 }

@@ -1,26 +1,25 @@
 #include "ROIDetectors.h"
 #include "stdafx.h"
 #include "opencv2/opencv.hpp"
-#include "Algorithms.h"
+#include "Thresholding.h"
 
 using namespace cv;
 
 vector<Mat*> DetectBody(Mat* imageGray, Mat* image) {
 	
 	vector<Mat*> output;
-	Mat* edges = new Mat();
 	Mat* binaryImage = OtsuThresholding(imageGray);
-	Canny(*binaryImage, *edges, 100, 200); // wykrywanie krawedzi na binarnym
 	output.push_back(binaryImage);
 
-	// krawedzie na kontury
+	Mat* edges = new Mat();
+	Canny(*binaryImage, *edges, 100, 200); 
 	vector<vector<Point> > contours;
 	vector<Vec4i> hierarchy;
 	findContours(*edges, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
 
-	// rysowanie konturu na output
 	Mat* result = new Mat();
 	*result = (*image).clone();
+	
 	for (int i = 0; i < contours.size(); i++)
 	{
 		if(contours[i].size()>50)
@@ -63,6 +62,7 @@ vector<Mat*> DetectMouth(Mat* imageGray, Mat* image, int sliderValue) {
 
 	Canny(*mouthRegion, *edges, 100, 200);
 	findContours(*edges, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
+
 	Mat* result = new Mat();
 	*result = (*image).clone();
 	for (int i = 0; i < contours.size(); i++)
@@ -71,6 +71,5 @@ vector<Mat*> DetectMouth(Mat* imageGray, Mat* image, int sliderValue) {
 	}
 
 	output.push_back(result);
-	output.push_back(blobBinaryImage);
 	return output;
 }

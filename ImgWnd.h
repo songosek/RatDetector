@@ -17,13 +17,13 @@ public:
 	virtual ~CImgWnd();
 
 protected:
-	BYTE*	m_pImage;
-	BYTE*	m_pBlackImg;
+	BYTE*	imageBytes;
+	BYTE*	imageGrayBytes;
 	BITMAPINFOHEADER bmih;
 	BITMAPINFOHEADER blackBmih;
-	HDRAWDIB m_hdd;
-	int		m_iSrcWidth;
-	int		m_iSrcHeight;
+	HDRAWDIB hdd;
+	int		sourceWidth;
+	int		sourceHeight;
 
 protected:
 	DECLARE_MESSAGE_MAP()

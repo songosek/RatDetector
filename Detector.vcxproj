@@ -188,7 +188,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="Thresholding.h" />
     <ClInclude Include="ROIDetectors.h" />
     <ClInclude Include="Detector.h" />
     <ClInclude Include="DetectorDlg.h" />
@@ -198,7 +198,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Algorithms.cpp" />
+    <ClCompile Include="Thresholding.cpp" />
     <ClCompile Include="ROIDetectors.cpp" />
     <ClCompile Include="Detector.cpp" />
     <ClCompile Include="DetectorDlg.cpp" />

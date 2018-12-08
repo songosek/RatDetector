@@ -55,7 +55,6 @@ vector<Mat*> DetectMouth(Mat* imageGray, Mat* image, int sliderValue) {
 			circle(*circles, center, 20, Scalar(255), CV_FILLED);
 		}
 	}
-
 	Mat* bodyMask = OtsuThresholding(imageGray);
 	Mat* mouthRegion = new Mat();
 	(*circles).copyTo(*mouthRegion, *bodyMask);
@@ -69,7 +68,6 @@ vector<Mat*> DetectMouth(Mat* imageGray, Mat* image, int sliderValue) {
 	{
 		drawContours(*result, contours, i, Scalar(255, 0, 0), 2, 8, hierarchy, 0);
 	}
-
 	output.push_back(result);
 	return output;
 }
